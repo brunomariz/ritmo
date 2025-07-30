@@ -1,15 +1,19 @@
 "use client";
-import { generateRhythmSequence } from "@/generators/rhythmGenerator";
+import { generateRandomNotesWeighted } from "@/generators/rhythmGenerator";
 import { RepiqueRhythmEvent } from "@/@types/rhythm";
 import Button from "./Button";
 
 interface GenerateButtonProps {
   setSequence: (sequence: RepiqueRhythmEvent[]) => void;
+  barCount: number;
 }
 
-export default function GenerateButton({ setSequence }: GenerateButtonProps) {
+export default function GenerateButton({
+  setSequence,
+  barCount,
+}: GenerateButtonProps) {
   const handleGenerate = () => {
-    const sequence = generateRhythmSequence();
+    const sequence = generateRandomNotesWeighted(barCount);
     setSequence(sequence);
   };
 

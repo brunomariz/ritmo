@@ -108,7 +108,9 @@ export function generateViradaDeDois(): RepiqueRhythmEvent[] {
   ];
 }
 
-export function generateRandomNotesWeighted(): RepiqueRhythmEvent[] {
+export function generateRandomNotesWeighted(
+  numBars: number
+): RepiqueRhythmEvent[] {
   const pitches = [
     { pitch: "head" as RepiqueNote["pitch"], weight: 7 },
     { pitch: "rimshot" as RepiqueNote["pitch"], weight: 7 },
@@ -145,7 +147,9 @@ export function generateRandomNotesWeighted(): RepiqueRhythmEvent[] {
   }
 
   const events: RepiqueRhythmEvent[] = [];
-  for (let i = 0; i < 16; i++) {
+
+  let totalPhraseDuration = 0;
+  while (totalPhraseDuration < numBars * 4) {
     // Select a random pitch based on weights
     const pitchRandom = Math.random() * totalPitchWeight;
     const selectedPitchIndex = pitchCumSum.findIndex(
@@ -159,21 +163,22 @@ export function generateRandomNotesWeighted(): RepiqueRhythmEvent[] {
       (sum) => sum >= durationRandom
     );
 
+    const lengthInBeats = durations[selectedDurationIndex].lengthInBeats;
+
     events.push({
       type: "note",
       data: {
         pitch: selectedPitch,
-        lengthInBeats: durations[selectedDurationIndex].lengthInBeats,
+        lengthInBeats: lengthInBeats,
         grouping: "simple",
         dotted: false,
         accent: "strong",
       },
     });
+
+    // Update total phrase duration
+    totalPhraseDuration += lengthInBeats;
   }
 
   return events;
-}
-
-export function generateRhythmSequence(): RepiqueRhythmEvent[] {
-  return generateRandomNotesWeighted();
 }
