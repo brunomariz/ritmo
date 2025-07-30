@@ -1,5 +1,5 @@
 import { RepiqueNote, RepiqueRhythmEvent } from "@/@types/rhythm";
-import { getSamplePath } from "./getSample";
+import { getSamplePath } from "./getSamplePath";
 import { get } from "http";
 
 export async function loadSample(
