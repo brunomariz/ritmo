@@ -1,6 +1,10 @@
 import React from "react";
 
-type Props = { title: string; state: any; setState: (state: any) => void };
+type Props = {
+  title: string;
+  state: number;
+  setState: (state: number) => void;
+};
 
 const Selector = ({ title, state, setState }: Props) => {
   return (
