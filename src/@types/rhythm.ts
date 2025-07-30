@@ -10,7 +10,7 @@ export type Grouping = "simple" | "triplet";
 
 export type Note = {
   pitch: string;
-  duration: number;
+  lengthInBeats: number;
   grouping: Grouping;
   dotted: boolean;
   accent: Accent;
@@ -21,7 +21,7 @@ export type RepiqueNote = Note & {
 };
 
 export type Stop = {
-  duration: number;
+  lengthInBeats: number;
 };
 
 export type RepiqueRhythmEvent = {

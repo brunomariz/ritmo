@@ -1,6 +1,5 @@
 import { RepiqueNote, RepiqueRhythmEvent } from "@/@types/rhythm";
 import { getSamplePath } from "./getSamplePath";
-import { get } from "http";
 
 export async function loadSample(
   audioCtx: AudioContext,
@@ -35,6 +34,8 @@ export async function playPercussionSequence(events: RepiqueRhythmEvent[]) {
   let currentTime = 0;
 
   // Schedule each event
+  const bpm = 120;
+
   for (const event of events) {
     if (event.type === "note") {
       const noteEvent = event.data as RepiqueNote;
@@ -45,6 +46,6 @@ export async function playPercussionSequence(events: RepiqueRhythmEvent[]) {
       source.start(startTime + currentTime);
     }
     // For both notes and stops, advance the current time
-    currentTime += event.data.duration;
+    currentTime += event.data.lengthInBeats;
   }
 }

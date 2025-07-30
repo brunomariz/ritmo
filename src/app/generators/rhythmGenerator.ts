@@ -21,7 +21,7 @@ function createBasicEvents(): RepiqueRhythmEvent[] {
     type: "note",
     data: {
       pitch,
-      duration: 0.25,
+      lengthInBeats: 0.25,
       grouping: "simple",
       dotted: false,
       accent: "strong",
@@ -39,7 +39,7 @@ export function generateViradaDeDois(): RepiqueRhythmEvent[] {
       type: "note",
       data: {
         pitch: "head",
-        duration: 0.25,
+        lengthInBeats: 0.25,
         grouping: "simple",
         dotted: false,
         accent: "strong",
@@ -49,7 +49,7 @@ export function generateViradaDeDois(): RepiqueRhythmEvent[] {
       type: "note",
       data: {
         pitch: "rimshot",
-        duration: 0.25,
+        lengthInBeats: 0.25,
         grouping: "simple",
         dotted: false,
         accent: "weak",
@@ -59,7 +59,7 @@ export function generateViradaDeDois(): RepiqueRhythmEvent[] {
       type: "note",
       data: {
         pitch: "rimshot",
-        duration: 0.25,
+        lengthInBeats: 0.25,
         grouping: "simple",
         dotted: false,
         accent: "strong",
@@ -69,7 +69,7 @@ export function generateViradaDeDois(): RepiqueRhythmEvent[] {
       type: "note",
       data: {
         pitch: "bass",
-        duration: 0.25,
+        lengthInBeats: 0.25,
         grouping: "simple",
         dotted: false,
         accent: "strong",
@@ -79,7 +79,7 @@ export function generateViradaDeDois(): RepiqueRhythmEvent[] {
       type: "note",
       data: {
         pitch: "rimshot",
-        duration: 0.5,
+        lengthInBeats: 0.5,
         grouping: "simple",
         dotted: false,
         accent: "strong",
@@ -89,7 +89,7 @@ export function generateViradaDeDois(): RepiqueRhythmEvent[] {
       type: "note",
       data: {
         pitch: "head",
-        duration: 0.5,
+        lengthInBeats: 0.5,
         grouping: "simple",
         dotted: false,
         accent: "strong",
@@ -99,7 +99,7 @@ export function generateViradaDeDois(): RepiqueRhythmEvent[] {
       type: "note",
       data: {
         pitch: "rimshot",
-        duration: 0.5,
+        lengthInBeats: 0.5,
         grouping: "simple",
         dotted: false,
         accent: "strong",
@@ -127,7 +127,7 @@ export function generateRandomNotes(): RepiqueRhythmEvent[] {
       type: "note",
       data: {
         pitch,
-        duration: durations[Math.floor(Math.random() * durations.length)],
+        lengthInBeats: durations[Math.floor(Math.random() * durations.length)],
         grouping: "simple",
         dotted: false,
         accent: "strong",
