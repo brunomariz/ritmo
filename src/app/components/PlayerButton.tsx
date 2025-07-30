@@ -1,6 +1,6 @@
 "use client";
 import { playPercussionSequence } from "@/utils/audioPlayer";
-import { generateRhythmSequence } from "@/app/generators/rhythmGenerator";
+import { generateRhythmSequence } from "@/generators/rhythmGenerator";
 import { RepiqueRhythmEvent } from "@/@types/rhythm";
 import Button from "./Button";
 
