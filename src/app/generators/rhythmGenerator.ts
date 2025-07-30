@@ -120,8 +120,6 @@ export function generateRandomNotes(): RepiqueRhythmEvent[] {
 
   const durations = [0.25 / 2, 0.25];
 
-  console.log();
-
   const events: RepiqueRhythmEvent[] = [];
   for (let i = 0; i < 16; i++) {
     const pitch = pitches[Math.floor(Math.random() * pitches.length)];

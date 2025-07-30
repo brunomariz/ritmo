@@ -1,11 +1,12 @@
 import { RepiqueNote, RepiqueRhythmEvent } from "@/@types/rhythm";
-import { getSample } from "./getSample";
+import { getSamplePath } from "./getSample";
+import { get } from "http";
 
 export async function loadSample(
   audioCtx: AudioContext,
-  pitch: string
+  pitch: RepiqueNote["pitch"]
 ): Promise<AudioBuffer> {
-  const response = await fetch(`/sounds/${pitch}.wav`);
+  const response = await fetch(getSamplePath(pitch));
   const arrayBuffer = await response.arrayBuffer();
   return await audioCtx.decodeAudioData(arrayBuffer);
 }

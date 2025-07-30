@@ -1,7 +1,7 @@
-import { Note } from "@/@types/rhythm";
+import { Note, RepiqueNote } from "@/@types/rhythm";
 
-export function getSample(note: Note): string {
-  switch (note.pitch) {
+export function getSamplePath(pitch: RepiqueNote["pitch"]): string {
+  switch (pitch) {
     case "rimshot":
       return "sounds/rimshot.wav";
     case "head":
@@ -15,6 +15,6 @@ export function getSample(note: Note): string {
     case "body":
       return "sounds/body.wav";
     default:
-      throw new Error(`Unknown pitch: ${note.pitch}`);
+      throw new Error(`Unknown pitch: ${pitch}`);
   }
 }
