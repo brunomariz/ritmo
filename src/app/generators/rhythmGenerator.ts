@@ -118,24 +118,39 @@ export function generateRandomNotes(): RepiqueRhythmEvent[] {
     "body",
   ];
 
-  const durations = [0.25 / 2, 0.25];
+  const durations = [
+    { lengthInBeats: 4, weight: 0 },
+    { lengthInBeats: 2, weight: 0 },
+    { lengthInBeats: 1, weight: 1 },
+    { lengthInBeats: 0.5, weight: 2 },
+    { lengthInBeats: 0.25, weight: 8 },
+    { lengthInBeats: 0.125, weight: 0 },
+    { lengthInBeats: 0.0625, weight: 0 },
+  ];
+  const totalWeight = durations.reduce((sum, d) => sum + d.weight, 0);
+  const cumSum: number[] = [];
+  for (const d of durations) {
+    cumSum.push((cumSum[cumSum.length - 1] || 0) + d.weight);
+  }
 
   const events: RepiqueRhythmEvent[] = [];
   for (let i = 0; i < 16; i++) {
+    // Select a random pitch and duration based on the cumulative sum
     const pitch = pitches[Math.floor(Math.random() * pitches.length)];
+    const r = Math.random() * totalWeight;
+    const selectedDurationIndex = cumSum.findIndex((sum) => sum >= r);
+
     events.push({
       type: "note",
       data: {
         pitch,
-        lengthInBeats: durations[Math.floor(Math.random() * durations.length)],
+        lengthInBeats: durations[selectedDurationIndex].lengthInBeats,
         grouping: "simple",
         dotted: false,
         accent: "strong",
       },
     });
   }
-
-  console.log(events);
 
   return events;
 }
