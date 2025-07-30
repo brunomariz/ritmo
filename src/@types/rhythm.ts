@@ -26,5 +26,5 @@ export type Stop = {
 
 export type RepiqueRhythmEvent = {
   type: "note" | "stop";
-  event: RepiqueNote | Stop;
+  data: RepiqueNote | Stop;
 };

@@ -19,7 +19,7 @@ function createBasicEvents(): RepiqueRhythmEvent[] {
 
   return pitches.map((pitch) => ({
     type: "note",
-    event: {
+    data: {
       pitch,
       duration: 0.25,
       grouping: "simple",
@@ -37,7 +37,7 @@ export function generateViradaDeDois(): RepiqueRhythmEvent[] {
     ...events,
     {
       type: "note",
-      event: {
+      data: {
         pitch: "head",
         duration: 0.25,
         grouping: "simple",
@@ -47,7 +47,7 @@ export function generateViradaDeDois(): RepiqueRhythmEvent[] {
     },
     {
       type: "note",
-      event: {
+      data: {
         pitch: "rimshot",
         duration: 0.25,
         grouping: "simple",
@@ -57,7 +57,7 @@ export function generateViradaDeDois(): RepiqueRhythmEvent[] {
     },
     {
       type: "note",
-      event: {
+      data: {
         pitch: "rimshot",
         duration: 0.25,
         grouping: "simple",
@@ -67,7 +67,7 @@ export function generateViradaDeDois(): RepiqueRhythmEvent[] {
     },
     {
       type: "note",
-      event: {
+      data: {
         pitch: "bass",
         duration: 0.25,
         grouping: "simple",
@@ -77,7 +77,7 @@ export function generateViradaDeDois(): RepiqueRhythmEvent[] {
     },
     {
       type: "note",
-      event: {
+      data: {
         pitch: "rimshot",
         duration: 0.5,
         grouping: "simple",
@@ -87,7 +87,7 @@ export function generateViradaDeDois(): RepiqueRhythmEvent[] {
     },
     {
       type: "note",
-      event: {
+      data: {
         pitch: "head",
         duration: 0.5,
         grouping: "simple",
@@ -97,7 +97,7 @@ export function generateViradaDeDois(): RepiqueRhythmEvent[] {
     },
     {
       type: "note",
-      event: {
+      data: {
         pitch: "rimshot",
         duration: 0.5,
         grouping: "simple",
@@ -109,7 +109,14 @@ export function generateViradaDeDois(): RepiqueRhythmEvent[] {
 }
 
 export function generateRandomNotes(): RepiqueRhythmEvent[] {
-  const pitches: RepiqueNote["pitch"][] = ["head", "rimshot", "slap", "bass"];
+  const pitches: RepiqueNote["pitch"][] = [
+    "head",
+    "rimshot",
+    "slap",
+    "bass",
+    "roll",
+    "body",
+  ];
 
   const durations = [0.25 / 2, 0.25];
 
@@ -120,7 +127,7 @@ export function generateRandomNotes(): RepiqueRhythmEvent[] {
     const pitch = pitches[Math.floor(Math.random() * pitches.length)];
     events.push({
       type: "note",
-      event: {
+      data: {
         pitch,
         duration: durations[Math.floor(Math.random() * durations.length)],
         grouping: "simple",

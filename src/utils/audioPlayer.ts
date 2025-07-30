@@ -16,10 +16,10 @@ export async function playPercussionSequence(events: RepiqueRhythmEvent[]) {
   // Extract only note events and get unique pitches
   const noteEvents = events.filter((event) => event.type === "note") as Array<{
     type: "note";
-    event: RepiqueNote;
+    data: RepiqueNote;
   }>;
   const uniquePitches = [
-    ...new Set(noteEvents.map((event) => event.event.pitch)),
+    ...new Set(noteEvents.map((event) => event.data.pitch)),
   ];
   const buffers: Record<string, AudioBuffer> = {};
 
@@ -36,7 +36,7 @@ export async function playPercussionSequence(events: RepiqueRhythmEvent[]) {
   // Schedule each event
   for (const event of events) {
     if (event.type === "note") {
-      const noteEvent = event.event as RepiqueNote;
+      const noteEvent = event.data as RepiqueNote;
       const buffer = buffers[noteEvent.pitch];
       const source = audioCtx.createBufferSource();
       source.buffer = buffer;
@@ -44,6 +44,6 @@ export async function playPercussionSequence(events: RepiqueRhythmEvent[]) {
       source.start(startTime + currentTime);
     }
     // For both notes and stops, advance the current time
-    currentTime += event.event.duration;
+    currentTime += event.data.duration;
   }
 }
