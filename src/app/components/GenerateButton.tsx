@@ -6,14 +6,16 @@ import Button from "./Button";
 interface GenerateButtonProps {
   setSequence: (sequence: RepiqueRhythmEvent[]) => void;
   barCount: number;
+  repeatCount: number;
 }
 
 export default function GenerateButton({
   setSequence,
   barCount,
+  repeatCount,
 }: GenerateButtonProps) {
   const handleGenerate = () => {
-    const sequence = generateRandomNotesWeighted(barCount);
+    const sequence = generateRandomNotesWeighted(barCount, repeatCount);
     setSequence(sequence);
   };
 

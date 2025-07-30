@@ -109,7 +109,8 @@ export function generateViradaDeDois(): RepiqueRhythmEvent[] {
 }
 
 export function generateRandomNotesWeighted(
-  numBars: number
+  barCount: number,
+  repeatCount: number
 ): RepiqueRhythmEvent[] {
   const pitches = [
     { pitch: "head" as RepiqueNote["pitch"], weight: 7 },
@@ -149,7 +150,7 @@ export function generateRandomNotesWeighted(
   const events: RepiqueRhythmEvent[] = [];
 
   let totalPhraseDuration = 0;
-  while (totalPhraseDuration < numBars * 4) {
+  while (totalPhraseDuration < (barCount / repeatCount) * 4) {
     // Select a random pitch based on weights
     const pitchRandom = Math.random() * totalPitchWeight;
     const selectedPitchIndex = pitchCumSum.findIndex(
@@ -180,5 +181,9 @@ export function generateRandomNotesWeighted(
     totalPhraseDuration += lengthInBeats;
   }
 
-  return events;
+  const repeatedEvents: RepiqueRhythmEvent[] = [];
+  for (let i = 0; i < repeatCount; i++) {
+    repeatedEvents.push(...events);
+  }
+  return repeatedEvents;
 }

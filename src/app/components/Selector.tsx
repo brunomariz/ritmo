@@ -1,15 +1,15 @@
 import React from "react";
 
 type Props = {
-  title: string;
+  title: React.ReactNode;
   state: number;
   setState: (state: number) => void;
 };
 
 const Selector = ({ title, state, setState }: Props) => {
   return (
-    <div>
-      <span>{title}:</span>
+    <div className="flex">
+      {title}:
       <input
         type="number"
         value={state}
