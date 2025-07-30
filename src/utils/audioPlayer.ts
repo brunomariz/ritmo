@@ -10,7 +10,10 @@ export async function loadSample(
   return await audioCtx.decodeAudioData(arrayBuffer);
 }
 
-export async function playPercussionSequence(events: RepiqueRhythmEvent[]) {
+export async function playPercussionSequence(
+  events: RepiqueRhythmEvent[],
+  bpm: number
+) {
   const audioCtx = new AudioContext();
 
   // Extract only note events and get unique pitches
@@ -34,7 +37,7 @@ export async function playPercussionSequence(events: RepiqueRhythmEvent[]) {
   let currentTime = 0;
 
   // Schedule each event
-  const bpm = 120;
+  const secondsPerBeat = 60 / bpm;
 
   for (const event of events) {
     if (event.type === "note") {
@@ -46,6 +49,6 @@ export async function playPercussionSequence(events: RepiqueRhythmEvent[]) {
       source.start(startTime + currentTime);
     }
     // For both notes and stops, advance the current time
-    currentTime += event.data.lengthInBeats;
+    currentTime += event.data.lengthInBeats * secondsPerBeat;
   }
 }

@@ -5,14 +5,15 @@ import { RepiqueRhythmEvent } from "@/@types/rhythm";
 
 interface PlayerButtonProps {
   sequence: RepiqueRhythmEvent[];
+  bpm: number;
 }
 
-export default function PlayerButton({ sequence }: PlayerButtonProps) {
+export default function PlayerButton({ sequence, bpm }: PlayerButtonProps) {
   const handlePlay = () => {
     // Use the passed sequence if available, otherwise generate a default one
     const sequenceToPlay =
       sequence.length > 0 ? sequence : generateRhythmSequence();
-    playPercussionSequence(sequenceToPlay);
+    playPercussionSequence(sequenceToPlay, bpm);
   };
 
   return (
