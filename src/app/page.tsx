@@ -11,7 +11,7 @@ export default function Home() {
 
   return (
     <div className="">
-      <main className="">
+      <main className="text-3xl font-bold">
         <BpmSelector bpm={bpm} setBpm={setBpm} />
         <GenerateButton setSequence={setSequence} />
         <PlayerButton sequence={sequence} bpm={bpm} />

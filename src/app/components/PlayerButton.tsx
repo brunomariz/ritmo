@@ -2,6 +2,7 @@
 import { playPercussionSequence } from "@/utils/audioPlayer";
 import { generateRhythmSequence } from "@/app/generators/rhythmGenerator";
 import { RepiqueRhythmEvent } from "@/@types/rhythm";
+import Button from "./Button";
 
 interface PlayerButtonProps {
   sequence: RepiqueRhythmEvent[];
@@ -17,11 +18,8 @@ export default function PlayerButton({ sequence, bpm }: PlayerButtonProps) {
   };
 
   return (
-    <button
-      onClick={handlePlay}
-      className="bg-green-500 text-white px-4 py-2 rounded"
-    >
+    <Button onClick={handlePlay} className="bg-green-500 text-white">
       Play
-    </button>
+    </Button>
   );
 }

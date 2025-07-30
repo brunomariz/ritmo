@@ -5,7 +5,7 @@ type Props = { bpm: number; setBpm: (bpm: number) => void };
 const BpmSelector = ({ bpm, setBpm }: Props) => {
   return (
     <div>
-      BPM:
+      <span>BPM:</span>
       <input
         type="number"
         value={bpm}
@@ -13,7 +13,7 @@ const BpmSelector = ({ bpm, setBpm }: Props) => {
         min={30}
         max={300}
         step={1}
-        className="p-2"
+        className="border rounded p-2 m-2"
       />
     </div>
   );
