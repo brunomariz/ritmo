@@ -6,7 +6,12 @@ export async function loadSample(
   pitch: Pitch,
   instrument: Instrument
 ): Promise<AudioBuffer> {
-  const response = await fetch(getSamplePath(pitch, instrument));
+  const samplePath =
+    Object.values(instrument.pitchMap).find((p) => {
+      return p.pitch == pitch;
+    })?.samplePath || "";
+
+  const response = await fetch(samplePath);
   const arrayBuffer = await response.arrayBuffer();
   return await audioCtx.decodeAudioData(arrayBuffer);
 }

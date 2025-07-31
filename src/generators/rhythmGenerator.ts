@@ -1,72 +1,70 @@
-import { log } from "console";
-import type { Note, Pitch } from "../@types/rhythm.js";
-import { InstrumentPitchMap, repiquePitchMap } from "@/constants/pitchMap";
+import type { Note, Pitch, PitchMap } from "../@types/rhythm.js";
 
-function createBasicEvents(): Note[] {
-  const pitches: Pitch[] = [
-    repiquePitchMap.head.pitch,
-    repiquePitchMap.rimshot.pitch,
-    repiquePitchMap.rimshot.pitch,
-    repiquePitchMap.slap.pitch,
-    repiquePitchMap.head.pitch,
-    repiquePitchMap.rimshot.pitch,
-    repiquePitchMap.rimshot.pitch,
-    repiquePitchMap.bass.pitch,
-  ];
+// function createBasicEvents(): Note[] {
+//   const pitches: Pitch[] = [
+//     repiquePitchMap.head.pitch,
+//     repiquePitchMap.rimshot.pitch,
+//     repiquePitchMap.rimshot.pitch,
+//     repiquePitchMap.slap.pitch,
+//     repiquePitchMap.head.pitch,
+//     repiquePitchMap.rimshot.pitch,
+//     repiquePitchMap.rimshot.pitch,
+//     repiquePitchMap.bass.pitch,
+//   ];
 
-  return pitches.map(
-    (pitch) => ({ lengthInBeats: 0.25, pitch, stop: false } as Note)
-  );
-}
+//   return pitches.map(
+//     (pitch) => ({ lengthInBeats: 0.25, pitch, stop: false } as Note)
+//   );
+// }
 
-export function generateViradaDeDois(): Note[] {
-  const events = createBasicEvents();
+// export function generateViradaDeDois(): Note[] {
+//   const events = createBasicEvents();
 
-  return [
-    ...events,
-    ...events,
-    {
-      pitch: repiquePitchMap.head.pitch,
-      lengthInBeats: 0.25,
-      stop: false,
-    },
-    {
-      pitch: repiquePitchMap.rimshot.pitch,
-      lengthInBeats: 0.25,
-      stop: false,
-    },
-    {
-      pitch: repiquePitchMap.rimshot.pitch,
-      lengthInBeats: 0.25,
-      stop: false,
-    },
-    {
-      pitch: repiquePitchMap.bass.pitch,
-      lengthInBeats: 0.25,
-      stop: false,
-    },
-    {
-      pitch: repiquePitchMap.rimshot.pitch,
-      lengthInBeats: 0.5,
-      stop: false,
-    },
-    {
-      pitch: repiquePitchMap.head.pitch,
-      lengthInBeats: 0.5,
-      stop: false,
-    },
-    {
-      pitch: repiquePitchMap.rimshot.pitch,
-      lengthInBeats: 0.5,
-      stop: false,
-    },
-  ];
-}
+//   return [
+//     ...events,
+//     ...events,
+//     {
+//       pitch: repiquePitchMap.head.pitch,
+//       lengthInBeats: 0.25,
+//       stop: false,
+//     },
+//     {
+//       pitch: repiquePitchMap.rimshot.pitch,
+//       lengthInBeats: 0.25,
+//       stop: false,
+//     },
+//     {
+//       pitch: repiquePitchMap.rimshot.pitch,
+//       lengthInBeats: 0.25,
+//       stop: false,
+//     },
+//     {
+//       pitch: repiquePitchMap.bass.pitch,
+//       lengthInBeats: 0.25,
+//       stop: false,
+//     },
+//     {
+//       pitch: repiquePitchMap.rimshot.pitch,
+//       lengthInBeats: 0.5,
+//       stop: false,
+//     },
+//     {
+//       pitch: repiquePitchMap.head.pitch,
+//       lengthInBeats: 0.5,
+//       stop: false,
+//     },
+//     {
+//       pitch: repiquePitchMap.rimshot.pitch,
+//       lengthInBeats: 0.5,
+//       stop: false,
+//     },
+//   ];
+// }
 
 export function generateRandomNotesWeighted(
   barCount: number,
   repeatCount: number,
-  pitchMap: InstrumentPitchMap
+  pitchMap: PitchMap
 ): Note[] {
   const durations = [
     { lengthInBeats: 4, weight: 0 },

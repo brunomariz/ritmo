@@ -6,23 +6,22 @@ import { Instrument, Note } from "@/@types/rhythm";
 import NumberSelector from "./components/NumberSelector";
 import { generateRandomNotesWeighted } from "../generators/rhythmGenerator";
 import OptionSelector from "./components/OptionSelector";
-import {
-  getPitchMapFromInstrument,
-  repiquePitchMap,
-} from "@/constants/pitchMap";
+import { instruments } from "@/constants/instruments";
 
 export default function Home() {
   const [barCount, setBarCount] = useState<number>(2);
   const [repeatCount, setRepeatCount] = useState<number>(2);
   const [bpm, setBpm] = useState<number>(120);
-  const [instrument, setInstrument] = useState<Instrument>("repique");
+  const [instrumentIndex, setInstrumentIndex] = useState<number>(0);
   const [sequence, setSequence] = useState<Note[]>(() =>
     generateRandomNotesWeighted(
       barCount,
       repeatCount,
-      getPitchMapFromInstrument(instrument)
+      instruments[instrumentIndex].pitchMap
     )
   );
+
+  console.log(instrumentIndex);
 
   return (
     <div className="">
@@ -31,22 +30,20 @@ export default function Home() {
         <div className="flex flex-col items-end gap-4 w-full max-w-md">
           <OptionSelector
             title="Instrumento"
-            onSelect={(instrument) => {
-              setInstrument(instrument);
+            onSelect={(value) => {
+              setInstrumentIndex(value);
               setSequence(
                 generateRandomNotesWeighted(
                   barCount,
                   repeatCount,
-                  getPitchMapFromInstrument(instrument)
+                  instruments[value].pitchMap
                 )
               );
             }}
-            options={[
-              { value: "repique" as Instrument, label: "Repique" },
-              { value: "caixa" as Instrument, label: "Chocalho" },
-              { value: "agogo" as Instrument, label: "Agogo" },
-            ]}
-            selectedValue={instrument}
+            options={instruments.map((instrument, index) => {
+              return { value: index, label: instrument.label };
+            })}
+            selectedValue={instrumentIndex}
           ></OptionSelector>
           <NumberSelector title="BPM" state={bpm} setState={setBpm} />
           <NumberSelector
@@ -76,9 +73,13 @@ export default function Home() {
             setSequence={setSequence}
             barCount={barCount}
             repeatCount={repeatCount}
-            pitchMap={getPitchMapFromInstrument(instrument)}
+            pitchMap={instruments[instrumentIndex].pitchMap}
           />
-          <PlayerButton sequence={sequence} bpm={bpm} instrument={instrument} />
+          <PlayerButton
+            sequence={sequence}
+            bpm={bpm}
+            instrument={instruments[instrumentIndex]}
+          />
         </div>
       </main>
     </div>

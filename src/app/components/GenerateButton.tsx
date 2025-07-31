@@ -1,14 +1,13 @@
 "use client";
 import { generateRandomNotesWeighted } from "@/generators/rhythmGenerator";
-import { Note } from "@/@types/rhythm";
+import { Note, PitchMap } from "@/@types/rhythm";
 import Button from "./Button";
-import { InstrumentPitchMap } from "@/constants/pitchMap";
 
 interface GenerateButtonProps {
   setSequence: (sequence: Note[]) => void;
   barCount: number;
   repeatCount: number;
-  pitchMap: InstrumentPitchMap;
+  pitchMap: PitchMap;
 }
 
 export default function GenerateButton({
