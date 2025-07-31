@@ -8,7 +8,13 @@ type Props = {
   setState: (state: number) => void;
 };
 
-const Selector = ({ title, state, setState, min = 1, max = 1000 }: Props) => {
+const NumberSelector = ({
+  title,
+  state,
+  setState,
+  min = 1,
+  max = 1000,
+}: Props) => {
   return (
     <div className="flex">
       {title}:
@@ -25,4 +31,4 @@ const Selector = ({ title, state, setState, min = 1, max = 1000 }: Props) => {
   );
 };
 
-export default Selector;
+export default NumberSelector;

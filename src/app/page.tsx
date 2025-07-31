@@ -3,7 +3,7 @@ import { useState } from "react";
 import PlayerButton from "./components/PlayerButton";
 import GenerateButton from "./components/GenerateButton";
 import { Instrument, Note } from "@/@types/rhythm";
-import Selector from "./components/Selector";
+import NumberSelector from "./components/NumberSelector";
 import { generateRandomNotesWeighted } from "../generators/rhythmGenerator";
 
 export default function Home() {
@@ -20,10 +20,14 @@ export default function Home() {
       <main className="text-3xl font-bold flex flex-col items-center justify-center min-h-screen">
         {/* Selectors */}
         <div className="flex flex-col items-end gap-4 w-full max-w-md">
-          <Selector title="BPM" state={bpm} setState={setBpm} />
-          <Selector title="Compassos" state={barCount} setState={setBarCount} />
+          <NumberSelector title="BPM" state={bpm} setState={setBpm} />
+          <NumberSelector
+            title="Compassos"
+            state={barCount}
+            setState={setBarCount}
+          />
           <div className="w-full">
-            <Selector
+            <NumberSelector
               title={
                 <span className="flex flex-col items-end">
                   Repetições
