@@ -28,9 +28,9 @@ function SliderSelector({ title, value, min, max, onChange }: Props) {
         className="cursor-pointer w-full"
         value={value}
       />
-      <div className="flex justify-between text-sm text-gray-500">
-        <span>{min}</span>
-        <span>{max}</span>
+      <div className="relative flex justify-between text-sm text-gray-500">
+        <span className="absolute -top-5 left-0">{min}</span>
+        <span className="absolute -top-5 left-[96%]">{max}</span>
       </div>
     </div>
   );
