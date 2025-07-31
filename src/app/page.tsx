@@ -31,11 +31,19 @@ export default function Home() {
         <div className="flex flex-col items-end gap-4 w-full max-w-md">
           <OptionSelector
             title="Instrumento"
-            onSelect={(value) => {
-              setInstrument(value);
+            onSelect={(instrument) => {
+              setInstrument(instrument);
+              setSequence(
+                generateRandomNotesWeighted(
+                  barCount,
+                  repeatCount,
+                  getPitchMapFromInstrument(instrument)
+                )
+              );
             }}
             options={[
               { value: "repique" as Instrument, label: "Repique" },
+              { value: "caixa" as Instrument, label: "Chocalho" },
               { value: "agogo" as Instrument, label: "Agogo" },
             ]}
             selectedValue={instrument}

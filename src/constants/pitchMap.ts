@@ -2,6 +2,7 @@ import { Instrument, Pitch } from "@/@types/rhythm";
 
 type RepiquePitches = "rimshot" | "head" | "slap" | "bass" | "roll" | "body";
 type AgogoPitches = "b1" | "b2" | "b3" | "b4";
+type CaixaPitches = "down" | "up";
 
 interface WeightedPitch {
   pitch: Pitch;
@@ -14,7 +15,8 @@ type WeightedPitchMap<T extends string> = Record<T, WeightedPitch>;
 // Union type that encompasses both pitch map structures
 export type InstrumentPitchMap =
   | WeightedPitchMap<RepiquePitches>
-  | WeightedPitchMap<AgogoPitches>;
+  | WeightedPitchMap<AgogoPitches>
+  | WeightedPitchMap<CaixaPitches>;
 
 export const repiquePitchMap: WeightedPitchMap<RepiquePitches> = {
   rimshot: { pitch: "C4", weight: 7 },
@@ -32,6 +34,11 @@ export const agogoPitchMap: WeightedPitchMap<AgogoPitches> = {
   b4: { pitch: "F4", weight: 1 },
 };
 
+export const caixaPitchMap: WeightedPitchMap<CaixaPitches> = {
+  down: { pitch: "C4", weight: 2 },
+  up: { pitch: "D4", weight: 1 },
+};
+
 // Utility function to get total weight from any pitch map
 export function getTotalWeight<T extends string>(
   pitchMap: WeightedPitchMap<T>
@@ -47,5 +54,7 @@ export function getPitchMapFromInstrument(instrument: Instrument) {
     return repiquePitchMap;
   } else if (instrument == "agogo") {
     return agogoPitchMap;
+  } else if (instrument == "caixa") {
+    return caixaPitchMap;
   } else throw new Error(`Instrument not found: ${instrument}`);
 }

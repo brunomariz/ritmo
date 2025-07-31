@@ -1,5 +1,9 @@
 import { Instrument, Pitch } from "@/@types/rhythm";
-import { agogoPitchMap, repiquePitchMap } from "@/constants/pitchMap";
+import {
+  agogoPitchMap,
+  caixaPitchMap,
+  repiquePitchMap,
+} from "@/constants/pitchMap";
 
 export function getSamplePath(pitch: Pitch, instrument: Instrument): string {
   if (instrument == "repique") {
@@ -29,6 +33,15 @@ export function getSamplePath(pitch: Pitch, instrument: Instrument): string {
         return "sounds/agogo/boca3.wav";
       case agogoPitchMap.b4.pitch:
         return "sounds/agogo/boca4.wav";
+      default:
+        throw new Error(`Unknown pitch: ${pitch}, ${instrument}`);
+    }
+  } else if (instrument == "caixa") {
+    switch (pitch) {
+      case caixaPitchMap.down.pitch:
+        return "sounds/caixa/down.wav";
+      case caixaPitchMap.up.pitch:
+        return "sounds/caixa/up.wav";
       default:
         throw new Error(`Unknown pitch: ${pitch}, ${instrument}`);
     }
