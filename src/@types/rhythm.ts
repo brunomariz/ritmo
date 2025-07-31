@@ -18,7 +18,14 @@ interface PitchMapItem {
 export type PitchMap = Record<string, PitchMapItem>;
 
 export type Instrument = {
-  name: "repique" | "agogo" | "caixa";
+  name:
+    | "repique"
+    | "agogo"
+    | "caixa"
+    | "chocalho"
+    | "marcacao"
+    | "terceira"
+    | "tamborim";
   label: string;
   pitchMap: PitchMap;
 };

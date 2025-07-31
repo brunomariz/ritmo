@@ -2,7 +2,7 @@
 import { useState } from "react";
 import PlayerButton from "./components/PlayerButton";
 import GenerateButton from "./components/GenerateButton";
-import { Instrument, Note } from "@/@types/rhythm";
+import { Note } from "@/@types/rhythm";
 import NumberSelector from "./components/NumberSelector";
 import { generateRandomNotesWeighted } from "../generators/rhythmGenerator";
 import OptionSelector from "./components/OptionSelector";

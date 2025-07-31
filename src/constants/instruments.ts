@@ -21,6 +21,35 @@ const caixaPitchMap: PitchMap = {
   up: { pitch: "D4", weight: 1, samplePath: "sounds/caixa/up.wav" },
 };
 
+const chocalhoPitchMap: PitchMap = {
+  frente: { pitch: "C4", weight: 1, samplePath: "sounds/chocalho/frente.wav" },
+  tras: { pitch: "D4", weight: 1, samplePath: "sounds/chocalho/tras.wav" },
+};
+
+const marcacaoPitchMap: PitchMap = {
+  primeira: {
+    pitch: "C4",
+    weight: 1,
+    samplePath: "sounds/marcacao/primeira.wav",
+  },
+  segunda: {
+    pitch: "D4",
+    weight: 1,
+    samplePath: "sounds/marcacao/segunda.wav",
+  },
+};
+
+const terceiraPitchMap: PitchMap = {
+  solto: { pitch: "C4", weight: 4, samplePath: "sounds/terceira/solto.wav" },
+  preso: { pitch: "D4", weight: 3, samplePath: "sounds/terceira/preso.wav" },
+  mao: { pitch: "E4", weight: 1, samplePath: "sounds/terceira/mao.wav" },
+};
+
+const tamborimPitchMap: PitchMap = {
+  frente: { pitch: "C4", weight: 4, samplePath: "sounds/tamborim/frente.wav" },
+  tras: { pitch: "D4", weight: 3, samplePath: "sounds/tamborim/tras.wav" },
+};
+
 // Utility function to get total weight from any pitch map
 export function getTotalInstrumentWeight(pitchMap: PitchMap): number {
   return Object.values(pitchMap).reduce(
@@ -42,7 +71,27 @@ export const instruments: Instrument[] = [
   },
   {
     name: "caixa",
-    label: "Chocalho",
+    label: "Caixa",
     pitchMap: caixaPitchMap,
+  },
+  {
+    name: "chocalho",
+    label: "Chocalho",
+    pitchMap: chocalhoPitchMap,
+  },
+  {
+    name: "marcacao",
+    label: "Marcação",
+    pitchMap: marcacaoPitchMap,
+  },
+  {
+    name: "terceira",
+    label: "Terceira",
+    pitchMap: terceiraPitchMap,
+  },
+  {
+    name: "tamborim",
+    label: "Tamborim",
+    pitchMap: tamborimPitchMap,
   },
 ];
