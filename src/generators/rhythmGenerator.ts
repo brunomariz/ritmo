@@ -1,17 +1,17 @@
 import { log } from "console";
 import type { Note, Pitch } from "../@types/rhythm.js";
-import { repiquePitchMap } from "@/constants/pitchMap";
+import { InstrumentPitchMap, repiquePitchMap } from "@/constants/pitchMap";
 
 function createBasicEvents(): Note[] {
   const pitches: Pitch[] = [
-    repiquePitchMap.head,
-    repiquePitchMap.rimshot,
-    repiquePitchMap.rimshot,
-    repiquePitchMap.slap,
-    repiquePitchMap.head,
-    repiquePitchMap.rimshot,
-    repiquePitchMap.rimshot,
-    repiquePitchMap.bass,
+    repiquePitchMap.head.pitch,
+    repiquePitchMap.rimshot.pitch,
+    repiquePitchMap.rimshot.pitch,
+    repiquePitchMap.slap.pitch,
+    repiquePitchMap.head.pitch,
+    repiquePitchMap.rimshot.pitch,
+    repiquePitchMap.rimshot.pitch,
+    repiquePitchMap.bass.pitch,
   ];
 
   return pitches.map(
@@ -26,37 +26,37 @@ export function generateViradaDeDois(): Note[] {
     ...events,
     ...events,
     {
-      pitch: repiquePitchMap.head,
+      pitch: repiquePitchMap.head.pitch,
       lengthInBeats: 0.25,
       stop: false,
     },
     {
-      pitch: repiquePitchMap.rimshot,
+      pitch: repiquePitchMap.rimshot.pitch,
       lengthInBeats: 0.25,
       stop: false,
     },
     {
-      pitch: repiquePitchMap.rimshot,
+      pitch: repiquePitchMap.rimshot.pitch,
       lengthInBeats: 0.25,
       stop: false,
     },
     {
-      pitch: repiquePitchMap.bass,
+      pitch: repiquePitchMap.bass.pitch,
       lengthInBeats: 0.25,
       stop: false,
     },
     {
-      pitch: repiquePitchMap.rimshot,
+      pitch: repiquePitchMap.rimshot.pitch,
       lengthInBeats: 0.5,
       stop: false,
     },
     {
-      pitch: repiquePitchMap.head,
+      pitch: repiquePitchMap.head.pitch,
       lengthInBeats: 0.5,
       stop: false,
     },
     {
-      pitch: repiquePitchMap.rimshot,
+      pitch: repiquePitchMap.rimshot.pitch,
       lengthInBeats: 0.5,
       stop: false,
     },
@@ -65,17 +65,9 @@ export function generateViradaDeDois(): Note[] {
 
 export function generateRandomNotesWeighted(
   barCount: number,
-  repeatCount: number
+  repeatCount: number,
+  pitchMap: InstrumentPitchMap
 ): Note[] {
-  const pitches = [
-    { pitch: repiquePitchMap.head, weight: 7 },
-    { pitch: repiquePitchMap.rimshot, weight: 7 },
-    { pitch: repiquePitchMap.bass, weight: 6 },
-    { pitch: repiquePitchMap.slap, weight: 5 },
-    { pitch: repiquePitchMap.roll, weight: 2 },
-    { pitch: repiquePitchMap.body, weight: 1 },
-  ];
-
   const durations = [
     { lengthInBeats: 4, weight: 0 },
     { lengthInBeats: 2, weight: 0 },
@@ -87,9 +79,12 @@ export function generateRandomNotesWeighted(
   ];
 
   // Calculate cumulative sums for pitches
-  const totalPitchWeight = pitches.reduce((sum, p) => sum + p.weight, 0);
+  const totalPitchWeight = Object.values(pitchMap).reduce(
+    (sum, p) => sum + p.weight,
+    0
+  );
   const pitchCumSum: number[] = [];
-  for (const p of pitches) {
+  for (const p of Object.values(pitchMap)) {
     pitchCumSum.push((pitchCumSum[pitchCumSum.length - 1] || 0) + p.weight);
   }
 
@@ -111,7 +106,7 @@ export function generateRandomNotesWeighted(
     const selectedPitchIndex = pitchCumSum.findIndex(
       (sum) => sum >= pitchRandom
     );
-    const selectedPitch = pitches[selectedPitchIndex].pitch;
+    const selectedPitch = Object.values(pitchMap)[selectedPitchIndex].pitch;
 
     // Select a random duration based on weights
     const durationRandom = Math.random() * totalDurationWeight;
