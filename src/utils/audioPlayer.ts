@@ -1,16 +1,21 @@
-import { Note, Pitch } from "@/@types/rhythm";
+import { Instrument, Note, Pitch } from "@/@types/rhythm";
 import { getSamplePath } from "./getSamplePath";
 
 export async function loadSample(
   audioCtx: AudioContext,
-  pitch: Pitch
+  pitch: Pitch,
+  instrument: Instrument
 ): Promise<AudioBuffer> {
-  const response = await fetch(getSamplePath(pitch));
+  const response = await fetch(getSamplePath(pitch, instrument));
   const arrayBuffer = await response.arrayBuffer();
   return await audioCtx.decodeAudioData(arrayBuffer);
 }
 
-export async function playPercussionSequence(notes: Note[], bpm: number) {
+export async function playSequence(
+  notes: Note[],
+  bpm: number,
+  instrument: Instrument
+) {
   const audioCtx = new AudioContext();
 
   // Extract only note events and get unique pitches
@@ -21,7 +26,7 @@ export async function playPercussionSequence(notes: Note[], bpm: number) {
   // Load all unique samples first
   await Promise.all(
     uniquePitches.map(async (pitch) => {
-      buffers[pitch] = await loadSample(audioCtx, pitch);
+      buffers[pitch] = await loadSample(audioCtx, pitch, instrument);
     })
   );
 

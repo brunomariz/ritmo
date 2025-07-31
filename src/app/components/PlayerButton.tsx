@@ -1,18 +1,23 @@
 "use client";
-import { playPercussionSequence } from "@/utils/audioPlayer";
+import { playSequence } from "@/utils/audioPlayer";
 import { generateRandomNotesWeighted } from "@/generators/rhythmGenerator";
-import { RepiqueRhythmEvent } from "@/@types/rhythm";
+import { Instrument, Note } from "@/@types/rhythm";
 import Button from "./Button";
 
 interface PlayerButtonProps {
-  sequence: RepiqueRhythmEvent[];
+  sequence: Note[];
   bpm: number;
+  instrument: Instrument;
 }
 
-export default function PlayerButton({ sequence, bpm }: PlayerButtonProps) {
+export default function PlayerButton({
+  sequence,
+  bpm,
+  instrument,
+}: PlayerButtonProps) {
   const handlePlay = () => {
     // Use the passed sequence if available, otherwise generate a default one
-    playPercussionSequence(sequence, bpm);
+    playSequence(sequence, bpm, instrument);
   };
 
   return (

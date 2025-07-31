@@ -1,10 +1,10 @@
 "use client";
 import { generateRandomNotesWeighted } from "@/generators/rhythmGenerator";
-import { RepiqueRhythmEvent } from "@/@types/rhythm";
+import { Note } from "@/@types/rhythm";
 import Button from "./Button";
 
 interface GenerateButtonProps {
-  setSequence: (sequence: RepiqueRhythmEvent[]) => void;
+  setSequence: (sequence: Note[]) => void;
   barCount: number;
   repeatCount: number;
 }
