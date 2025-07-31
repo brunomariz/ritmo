@@ -1,38 +1,110 @@
 import { Instrument, PitchMap } from "@/@types/rhythm";
 
 const repiquePitchMap: PitchMap = {
-  rimshot: { pitch: "C4", weight: 7, samplePath: "sounds/repique/rimshot.wav" },
-  head: { pitch: "D4", weight: 7, samplePath: "sounds/repique/head.wav" },
-  slap: { pitch: "E4", weight: 6, samplePath: "sounds/repique/slap.wav" },
-  bass: { pitch: "F4", weight: 5, samplePath: "sounds/repique/bass.wav" },
-  roll: { pitch: "G4", weight: 2, samplePath: "sounds/repique/roll.wav" },
-  body: { pitch: "A4", weight: 1, samplePath: "sounds/repique/body.wav" },
+  rimshot: {
+    label: "rimshot",
+    pitch: "C4",
+    weight: 7,
+    samplePath: "sounds/repique/rimshot.wav",
+  },
+  head: {
+    label: "head",
+    pitch: "D4",
+    weight: 7,
+    samplePath: "sounds/repique/head.wav",
+  },
+  slap: {
+    label: "slap",
+    pitch: "E4",
+    weight: 6,
+    samplePath: "sounds/repique/slap.wav",
+  },
+  bass: {
+    label: "bass",
+    pitch: "F4",
+    weight: 5,
+    samplePath: "sounds/repique/bass.wav",
+  },
+  roll: {
+    label: "roll",
+    pitch: "G4",
+    weight: 2,
+    samplePath: "sounds/repique/roll.wav",
+  },
+  body: {
+    label: "body",
+    pitch: "A4",
+    weight: 1,
+    samplePath: "sounds/repique/body.wav",
+  },
 };
 
 const agogoPitchMap: PitchMap = {
-  b1: { pitch: "C4", weight: 1, samplePath: "sounds/agogo/boca1.wav" },
-  b2: { pitch: "D4", weight: 1, samplePath: "sounds/agogo/boca2.wav" },
-  b3: { pitch: "E4", weight: 1, samplePath: "sounds/agogo/boca3.wav" },
-  b4: { pitch: "F4", weight: 1, samplePath: "sounds/agogo/boca4.wav" },
+  b1: {
+    label: "boca1",
+    pitch: "C4",
+    weight: 1,
+    samplePath: "sounds/agogo/boca1.wav",
+  },
+  b2: {
+    label: "b2",
+    pitch: "D4",
+    weight: 1,
+    samplePath: "sounds/agogo/boca2.wav",
+  },
+  b3: {
+    label: "b3",
+    pitch: "E4",
+    weight: 1,
+    samplePath: "sounds/agogo/boca3.wav",
+  },
+  b4: {
+    label: "b4",
+    pitch: "F4",
+    weight: 1,
+    samplePath: "sounds/agogo/boca4.wav",
+  },
 };
 
 const caixaPitchMap: PitchMap = {
-  down: { pitch: "C4", weight: 2, samplePath: "sounds/caixa/down.wav" },
-  up: { pitch: "D4", weight: 1, samplePath: "sounds/caixa/up.wav" },
+  down: {
+    label: "down",
+    pitch: "C4",
+    weight: 2,
+    samplePath: "sounds/caixa/down.wav",
+  },
+  up: {
+    label: "up",
+    pitch: "D4",
+    weight: 1,
+    samplePath: "sounds/caixa/up.wav",
+  },
 };
 
 const chocalhoPitchMap: PitchMap = {
-  frente: { pitch: "C4", weight: 1, samplePath: "sounds/chocalho/frente.wav" },
-  tras: { pitch: "D4", weight: 1, samplePath: "sounds/chocalho/tras.wav" },
+  frente: {
+    label: "frente",
+    pitch: "C4",
+    weight: 1,
+    samplePath: "sounds/chocalho/frente.wav",
+  },
+  tras: {
+    label: "tras",
+    pitch: "D4",
+    weight: 1,
+    samplePath: "sounds/chocalho/tras.wav",
+  },
 };
 
 const marcacaoPitchMap: PitchMap = {
   primeira: {
+    label: "primeira",
     pitch: "C4",
     weight: 1,
     samplePath: "sounds/marcacao/primeira.wav",
   },
   segunda: {
+    label: "segunda",
     pitch: "D4",
     weight: 1,
     samplePath: "sounds/marcacao/segunda.wav",
@@ -40,14 +112,39 @@ const marcacaoPitchMap: PitchMap = {
 };
 
 const terceiraPitchMap: PitchMap = {
-  solto: { pitch: "C4", weight: 4, samplePath: "sounds/terceira/solto.wav" },
-  preso: { pitch: "D4", weight: 3, samplePath: "sounds/terceira/preso.wav" },
-  mao: { pitch: "E4", weight: 1, samplePath: "sounds/terceira/mao.wav" },
+  solto: {
+    label: "solto",
+    pitch: "C4",
+    weight: 4,
+    samplePath: "sounds/terceira/solto.wav",
+  },
+  preso: {
+    label: "preso",
+    pitch: "D4",
+    weight: 3,
+    samplePath: "sounds/terceira/preso.wav",
+  },
+  mao: {
+    label: "mao",
+    pitch: "E4",
+    weight: 1,
+    samplePath: "sounds/terceira/mao.wav",
+  },
 };
 
 const tamborimPitchMap: PitchMap = {
-  frente: { pitch: "C4", weight: 4, samplePath: "sounds/tamborim/frente.wav" },
-  tras: { pitch: "D4", weight: 3, samplePath: "sounds/tamborim/tras.wav" },
+  frente: {
+    label: "frente",
+    pitch: "C4",
+    weight: 4,
+    samplePath: "sounds/tamborim/frente.wav",
+  },
+  tras: {
+    label: "tras",
+    pitch: "D4",
+    weight: 3,
+    samplePath: "sounds/tamborim/tras.wav",
+  },
 };
 
 // Utility function to get total weight from any pitch map

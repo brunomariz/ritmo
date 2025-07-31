@@ -11,6 +11,7 @@ export type Note = {
 
 interface PitchMapItem {
   pitch: Pitch;
+  label: string;
   samplePath: string;
   weight: number;
 }
