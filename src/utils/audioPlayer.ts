@@ -1,5 +1,4 @@
 import { Instrument, Note, Pitch } from "@/@types/rhythm";
-import { getSamplePath } from "./getSamplePath";
 
 export async function loadSample(
   audioCtx: AudioContext,
