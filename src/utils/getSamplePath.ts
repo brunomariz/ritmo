@@ -1,18 +1,19 @@
-import { Note, RepiqueNote } from "@/@types/rhythm";
+import { Note, Pitch } from "@/@types/rhythm";
+import { repiquePitchMap } from "@/constants/pitchMap";
 
-export function getSamplePath(pitch: RepiqueNote["pitch"]): string {
+export function getSamplePath(pitch: Pitch): string {
   switch (pitch) {
-    case "rimshot":
+    case repiquePitchMap.rimshot:
       return "sounds/repique/rimshot.wav";
-    case "head":
+    case repiquePitchMap.head:
       return "sounds/repique/head.wav";
-    case "slap":
+    case repiquePitchMap.slap:
       return "sounds/repique/slap.wav";
-    case "bass":
+    case repiquePitchMap.bass:
       return "sounds/repique/bass.wav";
-    case "roll":
+    case repiquePitchMap.roll:
       return "sounds/repique/roll.wav";
-    case "body":
+    case repiquePitchMap.body:
       return "sounds/repique/body.wav";
     default:
       throw new Error(`Unknown pitch: ${pitch}`);

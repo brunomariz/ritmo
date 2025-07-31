@@ -1,30 +1,10 @@
-export type RepiquePitch =
-  | "rimshot"
-  | "head"
-  | "slap"
-  | "bass"
-  | "roll"
-  | "body";
+export type Pitch = "C4" | "D4" | "E4" | "F4" | "G4" | "A4" | "B4";
+
 export type Accent = "strong" | "weak" | "none";
 export type Grouping = "simple" | "triplet";
 
 export type Note = {
-  pitch: string;
+  pitch: Pitch;
   lengthInBeats: number;
-  grouping: Grouping;
-  dotted: boolean;
-  accent: Accent;
-};
-
-export type RepiqueNote = Note & {
-  pitch: RepiquePitch;
-};
-
-export type Stop = {
-  lengthInBeats: number;
-};
-
-export type RepiqueRhythmEvent = {
-  type: "note" | "stop";
-  data: RepiqueNote | Stop;
+  stop: boolean;
 };

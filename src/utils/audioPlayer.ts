@@ -1,29 +1,21 @@
-import { RepiqueNote, RepiqueRhythmEvent } from "@/@types/rhythm";
+import { Note, Pitch } from "@/@types/rhythm";
 import { getSamplePath } from "./getSamplePath";
 
 export async function loadSample(
   audioCtx: AudioContext,
-  pitch: RepiqueNote["pitch"]
+  pitch: Pitch
 ): Promise<AudioBuffer> {
   const response = await fetch(getSamplePath(pitch));
   const arrayBuffer = await response.arrayBuffer();
   return await audioCtx.decodeAudioData(arrayBuffer);
 }
 
-export async function playPercussionSequence(
-  events: RepiqueRhythmEvent[],
-  bpm: number
-) {
+export async function playPercussionSequence(notes: Note[], bpm: number) {
   const audioCtx = new AudioContext();
 
   // Extract only note events and get unique pitches
-  const noteEvents = events.filter((event) => event.type === "note") as Array<{
-    type: "note";
-    data: RepiqueNote;
-  }>;
-  const uniquePitches = [
-    ...new Set(noteEvents.map((event) => event.data.pitch)),
-  ];
+  const nonStopNotes = notes.filter((note) => note.stop === false);
+  const uniquePitches = [...new Set(nonStopNotes.map((note) => note.pitch))];
   const buffers: Record<string, AudioBuffer> = {};
 
   // Load all unique samples first
@@ -39,16 +31,15 @@ export async function playPercussionSequence(
   // Schedule each event
   const secondsPerBeat = 60 / bpm;
 
-  for (const event of events) {
-    if (event.type === "note") {
-      const noteEvent = event.data as RepiqueNote;
-      const buffer = buffers[noteEvent.pitch];
+  for (const note of notes) {
+    if (!note.stop) {
+      const buffer = buffers[note.pitch];
       const source = audioCtx.createBufferSource();
       source.buffer = buffer;
       source.connect(audioCtx.destination);
       source.start(startTime + currentTime);
     }
     // For both notes and stops, advance the current time
-    currentTime += event.data.lengthInBeats * secondsPerBeat;
+    currentTime += note.lengthInBeats * secondsPerBeat;
   }
 }

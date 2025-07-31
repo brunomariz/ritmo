@@ -2,14 +2,14 @@
 import { useState } from "react";
 import PlayerButton from "./components/PlayerButton";
 import GenerateButton from "./components/GenerateButton";
-import { RepiqueRhythmEvent } from "@/@types/rhythm";
+import { Note } from "@/@types/rhythm";
 import Selector from "./components/Selector";
 import { generateRandomNotesWeighted } from "../generators/rhythmGenerator";
 
 export default function Home() {
   const [barCount, setBarCount] = useState<number>(2);
   const [repeatCount, setRepeatCount] = useState<number>(2);
-  const [sequence, setSequence] = useState<RepiqueRhythmEvent[]>(() =>
+  const [sequence, setSequence] = useState<Note[]>(() =>
     generateRandomNotesWeighted(barCount, repeatCount)
   );
   const [bpm, setBpm] = useState<number>(120);

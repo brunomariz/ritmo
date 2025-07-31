@@ -1,109 +1,64 @@
 import { log } from "console";
-import type {
-  Note,
-  RepiqueNote,
-  RepiqueRhythmEvent,
-} from "../@types/rhythm.js";
+import type { Note, Pitch } from "../@types/rhythm.js";
+import { repiquePitchMap } from "@/constants/pitchMap";
 
-function createBasicEvents(): RepiqueRhythmEvent[] {
-  const pitches: Note["pitch"][] = [
-    "head",
-    "rimshot",
-    "rimshot",
-    "slap",
-    "head",
-    "rimshot",
-    "rimshot",
-    "bass",
+function createBasicEvents(): Note[] {
+  const pitches: Pitch[] = [
+    repiquePitchMap.head,
+    repiquePitchMap.rimshot,
+    repiquePitchMap.rimshot,
+    repiquePitchMap.slap,
+    repiquePitchMap.head,
+    repiquePitchMap.rimshot,
+    repiquePitchMap.rimshot,
+    repiquePitchMap.bass,
   ];
 
-  return pitches.map((pitch) => ({
-    type: "note",
-    data: {
-      pitch,
-      lengthInBeats: 0.25,
-      grouping: "simple",
-      dotted: false,
-      accent: "strong",
-    },
-  }));
+  return pitches.map(
+    (pitch) => ({ lengthInBeats: 0.25, pitch, stop: false } as Note)
+  );
 }
 
-export function generateViradaDeDois(): RepiqueRhythmEvent[] {
+export function generateViradaDeDois(): Note[] {
   const events = createBasicEvents();
 
   return [
     ...events,
     ...events,
     {
-      type: "note",
-      data: {
-        pitch: "head",
-        lengthInBeats: 0.25,
-        grouping: "simple",
-        dotted: false,
-        accent: "strong",
-      },
+      pitch: repiquePitchMap.head,
+      lengthInBeats: 0.25,
+      stop: false,
     },
     {
-      type: "note",
-      data: {
-        pitch: "rimshot",
-        lengthInBeats: 0.25,
-        grouping: "simple",
-        dotted: false,
-        accent: "weak",
-      },
+      pitch: repiquePitchMap.rimshot,
+      lengthInBeats: 0.25,
+      stop: false,
     },
     {
-      type: "note",
-      data: {
-        pitch: "rimshot",
-        lengthInBeats: 0.25,
-        grouping: "simple",
-        dotted: false,
-        accent: "strong",
-      },
+      pitch: repiquePitchMap.rimshot,
+      lengthInBeats: 0.25,
+      stop: false,
     },
     {
-      type: "note",
-      data: {
-        pitch: "bass",
-        lengthInBeats: 0.25,
-        grouping: "simple",
-        dotted: false,
-        accent: "strong",
-      },
+      pitch: repiquePitchMap.bass,
+      lengthInBeats: 0.25,
+      stop: false,
     },
     {
-      type: "note",
-      data: {
-        pitch: "rimshot",
-        lengthInBeats: 0.5,
-        grouping: "simple",
-        dotted: false,
-        accent: "strong",
-      },
+      pitch: repiquePitchMap.rimshot,
+      lengthInBeats: 0.5,
+      stop: false,
     },
     {
-      type: "note",
-      data: {
-        pitch: "head",
-        lengthInBeats: 0.5,
-        grouping: "simple",
-        dotted: false,
-        accent: "strong",
-      },
+      pitch: repiquePitchMap.head,
+      lengthInBeats: 0.5,
+      stop: false,
     },
     {
-      type: "note",
-      data: {
-        pitch: "rimshot",
-        lengthInBeats: 0.5,
-        grouping: "simple",
-        dotted: false,
-        accent: "strong",
-      },
+      pitch: repiquePitchMap.rimshot,
+      lengthInBeats: 0.5,
+      stop: false,
     },
   ];
 }
@@ -111,14 +66,14 @@ export function generateViradaDeDois(): RepiqueRhythmEvent[] {
 export function generateRandomNotesWeighted(
   barCount: number,
   repeatCount: number
-): RepiqueRhythmEvent[] {
+): Note[] {
   const pitches = [
-    { pitch: "head" as RepiqueNote["pitch"], weight: 7 },
-    { pitch: "rimshot" as RepiqueNote["pitch"], weight: 7 },
-    { pitch: "bass" as RepiqueNote["pitch"], weight: 6 },
-    { pitch: "slap" as RepiqueNote["pitch"], weight: 5 },
-    { pitch: "roll" as RepiqueNote["pitch"], weight: 2 },
-    { pitch: "body" as RepiqueNote["pitch"], weight: 1 },
+    { pitch: repiquePitchMap.head, weight: 7 },
+    { pitch: repiquePitchMap.rimshot, weight: 7 },
+    { pitch: repiquePitchMap.bass, weight: 6 },
+    { pitch: repiquePitchMap.slap, weight: 5 },
+    { pitch: repiquePitchMap.roll, weight: 2 },
+    { pitch: repiquePitchMap.body, weight: 1 },
   ];
 
   const durations = [
@@ -147,7 +102,7 @@ export function generateRandomNotesWeighted(
     );
   }
 
-  const events: RepiqueRhythmEvent[] = [];
+  const events: Note[] = [];
 
   let totalPhraseDuration = 0;
   while (totalPhraseDuration < (barCount / repeatCount) * 4) {
@@ -167,23 +122,29 @@ export function generateRandomNotesWeighted(
     const lengthInBeats = durations[selectedDurationIndex].lengthInBeats;
 
     events.push({
-      type: "note",
-      data: {
-        pitch: selectedPitch,
-        lengthInBeats: lengthInBeats,
-        grouping: "simple",
-        dotted: false,
-        accent: "strong",
-      },
+      pitch: selectedPitch,
+      lengthInBeats: lengthInBeats,
+      stop: false,
     });
 
     // Update total phrase duration
     totalPhraseDuration += lengthInBeats;
   }
 
-  const repeatedEvents: RepiqueRhythmEvent[] = [];
+  const repeatedEvents: Note[] = [];
   for (let i = 0; i < repeatCount; i++) {
     repeatedEvents.push(...events);
   }
   return repeatedEvents;
+}
+
+export function generateRandomWeightedNotesGeneric(barCount: number): Note[] {
+  const events: Note[] = [];
+
+  events.push({
+    lengthInBeats: 1,
+    pitch: "C4",
+    stop: false,
+  } as Note);
+  return events;
 }
