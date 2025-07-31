@@ -26,7 +26,7 @@ const OptionSelector = <T,>({
             onSelect(option.value);
           }
         }}
-        className="border rounded p-4 m-2 text-lg h-12 bg-white"
+        className="border rounded p-4 m-2 text-lg h-12"
       >
         {options.map((option, index) => (
           <option key={index} value={String(option.value)}>
