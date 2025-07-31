@@ -3,17 +3,17 @@ import { Note, RepiqueNote } from "@/@types/rhythm";
 export function getSamplePath(pitch: RepiqueNote["pitch"]): string {
   switch (pitch) {
     case "rimshot":
-      return "sounds/rimshot.wav";
+      return "sounds/repique/rimshot.wav";
     case "head":
-      return "sounds/head.wav";
+      return "sounds/repique/head.wav";
     case "slap":
-      return "sounds/slap.wav";
+      return "sounds/repique/slap.wav";
     case "bass":
-      return "sounds/bass.wav";
+      return "sounds/repique/bass.wav";
     case "roll":
-      return "sounds/roll.wav";
+      return "sounds/repique/roll.wav";
     case "body":
-      return "sounds/body.wav";
+      return "sounds/repique/body.wav";
     default:
       throw new Error(`Unknown pitch: ${pitch}`);
   }
