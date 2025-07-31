@@ -57,7 +57,7 @@ export default function Home() {
                 <span className="flex flex-col items-end">
                   Repetições
                   <br />
-                  <span className="text-sm font-normal text-gray-500">
+                  <span className="text-sm font-normal text-gray-500 text-right">
                     (quantas vezes repete os compassos completos)
                   </span>
                 </span>

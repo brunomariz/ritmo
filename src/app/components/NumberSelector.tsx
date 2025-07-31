@@ -16,7 +16,7 @@ const NumberSelector = ({
   max = 1000,
 }: Props) => {
   return (
-    <div className="flex">
+    <div className="flex items-center">
       {title}:
       <input
         type="number"
