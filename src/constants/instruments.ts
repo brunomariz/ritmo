@@ -41,25 +41,25 @@ const repiquePitchMap: PitchMap = {
 
 const agogoPitchMap: PitchMap = {
   b1: {
-    label: "boca1",
+    label: "Agudo",
     pitch: "C4",
     weight: 1,
     samplePath: "sounds/agogo/boca1.wav",
   },
   b2: {
-    label: "b2",
+    label: "Médio agudo",
     pitch: "D4",
     weight: 1,
     samplePath: "sounds/agogo/boca2.wav",
   },
   b3: {
-    label: "b3",
+    label: "Médio grave",
     pitch: "E4",
     weight: 1,
     samplePath: "sounds/agogo/boca3.wav",
   },
   b4: {
-    label: "b4",
+    label: "Grave",
     pitch: "F4",
     weight: 1,
     samplePath: "sounds/agogo/boca4.wav",

@@ -28,6 +28,8 @@ export default function Home() {
   return (
     <div className="">
       <main className="text-3xl font-bold flex flex-col items-center justify-center min-h-screen">
+        <h1 className="p-5 opacity-50">Gerador de Ritmos</h1>
+        <hr className="w-full border-t border-gray-300 my-6" />
         <div className="flex flex-col sm:flex-row">
           {/* Main Selectors */}
           <div className="p-2 flex flex-col items-center">
@@ -97,27 +99,31 @@ export default function Home() {
             {showAdvancedConfigs && (
               <div className="">
                 <h2>Frequências das notas</h2>
-                <p className="text-sm text-gray-700 pb-3">
+                <p className="text-sm opacity-75 pb-3">
                   Quanto maior o número, mais a nota irá aparecer. Se o número
                   for zero, a nota não aparece.
                 </p>
-                {Object.entries(instrument.pitchMap).map(([key, value], i) => {
-                  return (
-                    <div key={i}>
-                      <SliderSelector
-                        max={10}
-                        min={0}
-                        onChange={(value) => {
-                          const newInstrument = { ...instrument };
-                          newInstrument.pitchMap[key].weight = value;
-                          setInstrument({ ...newInstrument });
-                        }}
-                        value={value.weight}
-                        title={value.label}
-                      ></SliderSelector>
-                    </div>
-                  );
-                })}
+                {Object.entries(instrument.pitchMap).map(
+                  ([pitchKey, pitchMapItem], i) => {
+                    console.log(pitchKey, pitchMapItem);
+                    return (
+                      <div key={i}>
+                        <SliderSelector
+                          max={10}
+                          min={0}
+                          onChange={(pitchMapItem) => {
+                            const newInstrument = { ...instrument };
+                            newInstrument.pitchMap[pitchKey].weight =
+                              pitchMapItem;
+                            setInstrument({ ...newInstrument });
+                          }}
+                          value={pitchMapItem.weight}
+                          title={pitchMapItem.label}
+                        ></SliderSelector>
+                      </div>
+                    );
+                  }
+                )}
               </div>
             )}
           </div>
