@@ -1,6 +1,6 @@
 import React from "react";
 
-type Props = {};
+type Props = Record<string, never>;
 
 function TitleSection({}: Props) {
   return (
