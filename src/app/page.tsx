@@ -65,11 +65,19 @@ export default function Home() {
                 })}
                 selectedValue={instrument.name}
               ></OptionSelector>
-              <NumberSelector title="BPM" state={bpm} setState={setBpm} />
+              <NumberSelector
+                title="BPM"
+                state={bpm}
+                setState={setBpm}
+                min={30}
+                max={240}
+              />
               <NumberSelector
                 title="Compassos"
                 state={barCount}
                 setState={setBarCount}
+                min={1}
+                max={10}
               />
               <div className="w-full">
                 <NumberSelector
