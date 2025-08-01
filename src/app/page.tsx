@@ -26,7 +26,6 @@ export default function Home() {
     { lengthInBeats: 0.5, weight: 2 },
     { lengthInBeats: 0.25, weight: 8 },
     { lengthInBeats: 0.125, weight: 0 },
-    { lengthInBeats: 0.0625, weight: 0 },
   ]);
   const [sequence, setSequence] = useState<Note[]>(() =>
     generateRandomNotesWeighted(barCount, instrument.pitchMap, durationWeights)
