@@ -97,8 +97,9 @@ export function generateRandomNotesWeighted(
 
   const events: Note[] = [];
 
-  let totalPhraseDuration = 0;
-  while (totalPhraseDuration < (barCount / repeatCount) * 4) {
+  let totalSequenceDuration = 0;
+  const numBeatsInSequence = (barCount / repeatCount) * 4;
+  while (totalSequenceDuration < numBeatsInSequence) {
     // Select a random pitch based on weights
     const pitchRandom = Math.random() * totalPitchWeight;
     const selectedPitchIndex = pitchCumSum.findIndex(
@@ -112,16 +113,20 @@ export function generateRandomNotesWeighted(
       (sum) => sum >= durationRandom
     );
 
-    const lengthInBeats = durations[selectedDurationIndex].lengthInBeats;
+    let selectedLengthInBeats = durations[selectedDurationIndex].lengthInBeats;
+
+    while (selectedLengthInBeats + totalSequenceDuration > numBeatsInSequence) {
+      selectedLengthInBeats /= 2;
+    }
 
     events.push({
       pitch: selectedPitch,
-      lengthInBeats: lengthInBeats,
+      lengthInBeats: selectedLengthInBeats,
       stop: false,
     });
 
     // Update total phrase duration
-    totalPhraseDuration += lengthInBeats;
+    totalSequenceDuration += selectedLengthInBeats;
   }
 
   const repeatedEvents: Note[] = [];
