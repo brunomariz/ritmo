@@ -25,7 +25,7 @@ export default function PlayerButton({
 
   return (
     <Button onClick={handlePlay} className="bg-[#0e1e4c] text-white">
-      Play
+      ▶️ Tocar
     </Button>
   );
 }

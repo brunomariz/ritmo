@@ -105,10 +105,10 @@ export default function Home() {
           </div>
           {/* Music notation display */}
           <button
-            className="m-1 text-md w-72 px-4 py-2 rounded hover:brightness-90 active:brightness-75 bg-[#4c6c6c] text-white"
+            className="m-1 text-md w-96 px-4 py-2 rounded hover:brightness-90 active:brightness-75 bg-[#4c6c6c] text-white"
             onClick={() => setShowScore((prev) => !prev)}
           >
-            {showScore ? "Ocultar Partitura" : "Revelar Partitura"}
+            {showScore ? "🙈 Ocultar Partitura" : "🎼 Revelar Partitura"}
           </button>
           {showScore && (
             <VexFlowRenderer
