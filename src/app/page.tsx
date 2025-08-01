@@ -17,14 +17,29 @@ export default function Home() {
   const [repeatCount, setRepeatCount] = useState<number>(1);
   const [bpm, setBpm] = useState<number>(120);
   const [instrument, setInstrument] = useState<Instrument>(instruments[0]);
-  const [sequence, setSequence] = useState<Note[]>(() =>
-    generateRandomNotesWeighted(barCount, instrument.pitchMap)
-  );
   const [showAdvancedConfigs, setShowAdvancedConfigs] = useState(false);
   const [showScore, setShowScore] = useState(false);
+  const [durationWeights, setDurationWeights] = useState([
+    { lengthInBeats: 4, weight: 0 },
+    { lengthInBeats: 2, weight: 0 },
+    { lengthInBeats: 1, weight: 1 },
+    { lengthInBeats: 0.5, weight: 2 },
+    { lengthInBeats: 0.25, weight: 8 },
+    { lengthInBeats: 0.125, weight: 0 },
+    { lengthInBeats: 0.0625, weight: 0 },
+  ]);
+  const [sequence, setSequence] = useState<Note[]>(() =>
+    generateRandomNotesWeighted(barCount, instrument.pitchMap, durationWeights)
+  );
 
   useEffect(() => {
-    setSequence(generateRandomNotesWeighted(barCount, instrument.pitchMap));
+    setSequence(
+      generateRandomNotesWeighted(
+        barCount,
+        instrument.pitchMap,
+        durationWeights
+      )
+    );
   }, [instrument]);
 
   return (
@@ -78,6 +93,7 @@ export default function Home() {
                 setSequence={setSequence}
                 barCount={barCount}
                 pitchMap={instrument.pitchMap}
+                durationWeights={durationWeights}
               />
               <PlayerButton
                 sequence={sequence}
@@ -92,7 +108,7 @@ export default function Home() {
             className="m-1 text-md w-72 px-4 py-2 rounded hover:brightness-90 active:brightness-75 bg-[#4c6c6c] text-white"
             onClick={() => setShowScore((prev) => !prev)}
           >
-            {showAdvancedConfigs ? "Ocultar Partitura" : "Revelar Partitura"}
+            {showScore ? "Ocultar Partitura" : "Revelar Partitura"}
           </button>
           {showScore && (
             <VexFlowRenderer
@@ -107,6 +123,8 @@ export default function Home() {
             setInstrument={setInstrument}
             setShowAdvancedConfigs={setShowAdvancedConfigs}
             showAdvancedConfigs={showAdvancedConfigs}
+            durationWeights={durationWeights}
+            setDurationWeights={setDurationWeights}
           ></AdvancedOptionsSection>
         </div>
       </main>

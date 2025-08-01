@@ -63,17 +63,13 @@ import type { Note, Pitch, PitchMap } from "../@types/rhythm.js";
 
 export function generateRandomNotesWeighted(
   barCount: number,
-  pitchMap: PitchMap
+  pitchMap: PitchMap,
+  durationWeights: {
+    lengthInBeats: number;
+    weight: number;
+  }[]
 ): Note[] {
-  const durations = [
-    { lengthInBeats: 4, weight: 0 },
-    { lengthInBeats: 2, weight: 0 },
-    { lengthInBeats: 1, weight: 1 },
-    { lengthInBeats: 0.5, weight: 2 },
-    { lengthInBeats: 0.25, weight: 8 },
-    { lengthInBeats: 0.125, weight: 0 },
-    { lengthInBeats: 0.0625, weight: 0 },
-  ];
+  const durations = durationWeights;
 
   // Calculate cumulative sums for pitches
   const totalPitchWeight = Object.values(pitchMap).reduce(

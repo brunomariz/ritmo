@@ -7,15 +7,24 @@ interface GenerateButtonProps {
   setSequence: (sequence: Note[]) => void;
   barCount: number;
   pitchMap: PitchMap;
+  durationWeights: {
+    lengthInBeats: number;
+    weight: number;
+  }[];
 }
 
 export default function GenerateButton({
   setSequence,
   barCount,
   pitchMap,
+  durationWeights,
 }: GenerateButtonProps) {
   const handleGenerate = () => {
-    const sequence = generateRandomNotesWeighted(barCount, pitchMap);
+    const sequence = generateRandomNotesWeighted(
+      barCount,
+      pitchMap,
+      durationWeights
+    );
     setSequence(sequence);
   };
 
