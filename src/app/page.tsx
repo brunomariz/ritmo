@@ -8,6 +8,8 @@ import { generateRandomNotesWeighted } from "../generators/rhythmGenerator";
 import OptionSelector from "./components/OptionSelector";
 import { instruments } from "@/constants/instruments";
 import SliderSelector from "./components/SliderSelector";
+import TitleSection from "./sections/TitleSection";
+import AdvancedOptionsSection from "./sections/AdvancedOptionsSection";
 
 export default function Home() {
   const [barCount, setBarCount] = useState<number>(2);
@@ -28,8 +30,7 @@ export default function Home() {
   return (
     <div className="">
       <main className="text-3xl font-bold flex flex-col items-center justify-center min-h-screen">
-        <h1 className="p-5 opacity-50">Gerador de Ritmos</h1>
-        <hr className="w-full border-t border-gray-300 my-6" />
+        <TitleSection></TitleSection>
         <div className="flex flex-col sm:flex-row">
           {/* Main Selectors */}
           <div className="p-2 flex flex-col items-center">
@@ -87,46 +88,12 @@ export default function Home() {
             </div>
           </div>
           {/* Note probability weights */}
-          <div className="p-2 flex flex-col">
-            <button
-              className="text-sm px-4 py-2 rounded hover:brightness-90 active:brightness-75 bg-gray-600 text-white"
-              onClick={() => setShowAdvancedConfigs((prev) => !prev)}
-            >
-              {showAdvancedConfigs
-                ? "Ocultar configurações avançadas"
-                : "Configurações avançadas"}
-            </button>
-            {showAdvancedConfigs && (
-              <div className="">
-                <h2>Frequências das notas</h2>
-                <p className="text-sm opacity-75 pb-3">
-                  Quanto maior o número, mais a nota irá aparecer. Se o número
-                  for zero, a nota não aparece.
-                </p>
-                {Object.entries(instrument.pitchMap).map(
-                  ([pitchKey, pitchMapItem], i) => {
-                    console.log(pitchKey, pitchMapItem);
-                    return (
-                      <div key={i}>
-                        <SliderSelector
-                          max={10}
-                          min={0}
-                          onChange={(pitchMapItem) => {
-                            const newInstrument = { ...instrument };
-                            newInstrument.pitchMap[pitchKey].weight =
-                              pitchMapItem;
-                            setInstrument({ ...newInstrument });
-                          }}
-                          value={pitchMapItem.weight}
-                          title={pitchMapItem.label}
-                        ></SliderSelector>
-                      </div>
-                    );
-                  }
-                )}
-              </div>
-            )}
-          </div>
+          <AdvancedOptionsSection
+            instrument={instrument}
+            setInstrument={setInstrument}
+            setShowAdvancedConfigs={setShowAdvancedConfigs}
+            showAdvancedConfigs={showAdvancedConfigs}
+          ></AdvancedOptionsSection>
         </div>
       </main>
     </div>
