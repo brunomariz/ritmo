@@ -116,10 +116,13 @@ export function generateRandomNotesWeighted(
         selectedLengthInBeats /= 2;
       }
 
+      const randomFrequency = 0.8;
+      const randomStop = Math.random() > randomFrequency;
+
       events.push({
-        pitch: selectedPitch,
+        pitch: randomStop ? "G4" : selectedPitch,
         lengthInBeats: selectedLengthInBeats,
-        stop: false,
+        stop: randomStop ? true : false,
       });
 
       // Update total bar duration
