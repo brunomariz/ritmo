@@ -8,16 +8,19 @@ interface PlayerButtonProps {
   sequence: Note[];
   bpm: number;
   instrument: Instrument;
+  repeatCount: number;
 }
 
 export default function PlayerButton({
   sequence,
   bpm,
   instrument,
+  repeatCount,
 }: PlayerButtonProps) {
   const handlePlay = () => {
     // Use the passed sequence if available, otherwise generate a default one
-    playSequence(sequence, bpm, instrument);
+    const repeatedSequence = Array(repeatCount).fill(sequence).flat();
+    playSequence(repeatedSequence, bpm, instrument);
   };
 
   return (

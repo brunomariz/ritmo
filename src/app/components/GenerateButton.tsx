@@ -6,22 +6,16 @@ import Button from "./Button";
 interface GenerateButtonProps {
   setSequence: (sequence: Note[]) => void;
   barCount: number;
-  repeatCount: number;
   pitchMap: PitchMap;
 }
 
 export default function GenerateButton({
   setSequence,
   barCount,
-  repeatCount,
   pitchMap,
 }: GenerateButtonProps) {
   const handleGenerate = () => {
-    const sequence = generateRandomNotesWeighted(
-      barCount,
-      repeatCount,
-      pitchMap
-    );
+    const sequence = generateRandomNotesWeighted(barCount, pitchMap);
     setSequence(sequence);
   };
 

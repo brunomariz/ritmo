@@ -10,28 +10,27 @@ import { instruments } from "@/constants/instruments";
 import SliderSelector from "./components/SliderSelector";
 import TitleSection from "./sections/TitleSection";
 import AdvancedOptionsSection from "./sections/AdvancedOptionsSection";
+import VexFlowRenderer from "./components/VexFlowRenderer";
 
 export default function Home() {
-  const [barCount, setBarCount] = useState<number>(2);
-  const [repeatCount, setRepeatCount] = useState<number>(2);
+  const [barCount, setBarCount] = useState<number>(1);
+  const [repeatCount, setRepeatCount] = useState<number>(1);
   const [bpm, setBpm] = useState<number>(120);
   const [instrument, setInstrument] = useState<Instrument>(instruments[0]);
   const [sequence, setSequence] = useState<Note[]>(() =>
-    generateRandomNotesWeighted(barCount, repeatCount, instrument.pitchMap)
+    generateRandomNotesWeighted(barCount, instrument.pitchMap)
   );
   const [showAdvancedConfigs, setShowAdvancedConfigs] = useState(false);
 
   useEffect(() => {
-    setSequence(
-      generateRandomNotesWeighted(barCount, repeatCount, instrument.pitchMap)
-    );
+    setSequence(generateRandomNotesWeighted(barCount, instrument.pitchMap));
   }, [instrument]);
 
   return (
     <div className="">
       <main className="text-3xl font-bold flex flex-col items-center justify-center min-h-screen">
         <TitleSection></TitleSection>
-        <div className="flex flex-col sm:flex-row">
+        <div className="flex flex-col">
           {/* Main Selectors */}
           <div className="p-2 flex flex-col items-center">
             <div className="flex flex-col items-end gap-4 w-full max-w-md">
@@ -77,16 +76,22 @@ export default function Home() {
               <GenerateButton
                 setSequence={setSequence}
                 barCount={barCount}
-                repeatCount={repeatCount}
                 pitchMap={instrument.pitchMap}
               />
               <PlayerButton
                 sequence={sequence}
+                repeatCount={repeatCount}
                 bpm={bpm}
                 instrument={instrument}
               />
             </div>
           </div>
+          {/* Music notation display */}
+          <VexFlowRenderer
+            sequence={sequence}
+            barCount={barCount}
+            repeatCount={repeatCount}
+          ></VexFlowRenderer>
           {/* Note probability weights */}
           <AdvancedOptionsSection
             instrument={instrument}

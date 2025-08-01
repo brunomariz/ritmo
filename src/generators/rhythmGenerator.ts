@@ -63,7 +63,6 @@ import type { Note, Pitch, PitchMap } from "../@types/rhythm.js";
 
 export function generateRandomNotesWeighted(
   barCount: number,
-  repeatCount: number,
   pitchMap: PitchMap
 ): Note[] {
   const durations = [
@@ -97,43 +96,42 @@ export function generateRandomNotesWeighted(
 
   const events: Note[] = [];
 
-  let totalSequenceDuration = 0;
-  const numBeatsInSequence = (barCount / repeatCount) * 4;
-  while (totalSequenceDuration < numBeatsInSequence) {
-    // Select a random pitch based on weights
-    const pitchRandom = Math.random() * totalPitchWeight;
-    const selectedPitchIndex = pitchCumSum.findIndex(
-      (sum) => sum >= pitchRandom
-    );
-    const selectedPitch = Object.values(pitchMap)[selectedPitchIndex].pitch;
+  const numBeatsInBar = 4;
+  for (let index = 0; index < barCount; index++) {
+    let totalCurrentBarDuration = 0;
+    while (totalCurrentBarDuration < numBeatsInBar) {
+      // Select a random pitch based on weights
+      const pitchRandom = Math.random() * totalPitchWeight;
+      const selectedPitchIndex = pitchCumSum.findIndex(
+        (sum) => sum >= pitchRandom
+      );
+      const selectedPitch = Object.values(pitchMap)[selectedPitchIndex].pitch;
 
-    // Select a random duration based on weights
-    const durationRandom = Math.random() * totalDurationWeight;
-    const selectedDurationIndex = durationCumSum.findIndex(
-      (sum) => sum >= durationRandom
-    );
+      // Select a random duration based on weights
+      const durationRandom = Math.random() * totalDurationWeight;
+      const selectedDurationIndex = durationCumSum.findIndex(
+        (sum) => sum >= durationRandom
+      );
 
-    let selectedLengthInBeats = durations[selectedDurationIndex].lengthInBeats;
+      let selectedLengthInBeats =
+        durations[selectedDurationIndex].lengthInBeats;
 
-    while (selectedLengthInBeats + totalSequenceDuration > numBeatsInSequence) {
-      selectedLengthInBeats /= 2;
+      while (selectedLengthInBeats + totalCurrentBarDuration > numBeatsInBar) {
+        selectedLengthInBeats /= 2;
+      }
+
+      events.push({
+        pitch: selectedPitch,
+        lengthInBeats: selectedLengthInBeats,
+        stop: false,
+      });
+
+      // Update total bar duration
+      totalCurrentBarDuration += selectedLengthInBeats;
     }
-
-    events.push({
-      pitch: selectedPitch,
-      lengthInBeats: selectedLengthInBeats,
-      stop: false,
-    });
-
-    // Update total phrase duration
-    totalSequenceDuration += selectedLengthInBeats;
   }
 
-  const repeatedEvents: Note[] = [];
-  for (let i = 0; i < repeatCount; i++) {
-    repeatedEvents.push(...events);
-  }
-  return repeatedEvents;
+  return events;
 }
 
 export function generateRandomWeightedNotesGeneric(barCount: number): Note[] {
