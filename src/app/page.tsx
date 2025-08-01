@@ -48,7 +48,7 @@ export default function Home() {
         <TitleSection></TitleSection>
         <div className="flex flex-col items-center">
           {/* Main Selectors */}
-          <div className="p-2 flex flex-col items-center">
+          <div className="p-2 flex flex-col items-center max-w-sm">
             <div className="flex flex-col items-end gap-4 w-full max-w-md">
               <OptionSelector
                 title="Instrumento"

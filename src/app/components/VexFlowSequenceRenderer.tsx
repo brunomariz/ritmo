@@ -57,8 +57,8 @@ function VexFlowSequenceRenderer({
   const bars = splitNotesIntoBars(sequence);
 
   return (
-    <div className="w-screen flex justify-center">
-      <div className="w-10/12 overflow-x-auto">
+    <div className="w-full flex justify-center">
+      <div className="overflow-x-auto">
         {bars.map((bar, index) => {
           return <VexFlowBar key={index} notes={bar}></VexFlowBar>;
         })}
