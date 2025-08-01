@@ -10,7 +10,7 @@ import { instruments } from "@/constants/instruments";
 import SliderSelector from "./components/SliderSelector";
 import TitleSection from "./sections/TitleSection";
 import AdvancedOptionsSection from "./sections/AdvancedOptionsSection";
-import VexFlowRenderer from "./components/VexFlowRenderer";
+import VexFlowSequenceRenderer from "./components/VexFlowSequenceRenderer";
 
 export default function Home() {
   const [barCount, setBarCount] = useState<number>(1);
@@ -111,11 +111,11 @@ export default function Home() {
             {showScore ? "🙈 Ocultar Partitura" : "🎼 Revelar Partitura"}
           </button>
           {showScore && (
-            <VexFlowRenderer
+            <VexFlowSequenceRenderer
               sequence={sequence}
               barCount={barCount}
               repeatCount={repeatCount}
-            ></VexFlowRenderer>
+            ></VexFlowSequenceRenderer>
           )}
           {/* Note and duration probability weights */}
           <AdvancedOptionsSection

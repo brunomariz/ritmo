@@ -2,17 +2,11 @@ import { Note } from "@/@types/rhythm";
 import React, { useRef, useEffect } from "react";
 import { Renderer, Stave, StaveNote, Formatter, Voice } from "vexflow";
 
-interface VexFlowRendererProps {
-  sequence: Note[];
-  barCount: number;
-  repeatCount: number;
+interface VexFlowBarProps {
+  notes: Note[];
 }
 
-function VexFlowRenderer({
-  sequence,
-  barCount,
-  repeatCount,
-}: VexFlowRendererProps) {
+function VexFlowBar({ notes }: VexFlowBarProps) {
   const containerRef = useRef<HTMLDivElement | null>(null);
 
   function convertNotesToVexNotes(notes: Note[]) {
@@ -70,65 +64,17 @@ function VexFlowRenderer({
     voice.draw(context, stave);
   }
 
-  function splitNotesIntoBars(notes: Note[]): Note[][] {
-    const bars: Note[][] = [];
-    let currentBar: Note[] = [];
-    let currentBarBeats = 0;
-    const beatsPerBar = 4;
-
-    for (const note of notes) {
-      // If adding this note would exceed 4 beats, start a new bar
-      if (currentBarBeats + note.lengthInBeats > beatsPerBar) {
-        // Only push the current bar if it has notes
-        if (currentBar.length > 0) {
-          bars.push(currentBar);
-        }
-        // Start new bar with current note
-        currentBar = [note];
-        currentBarBeats = note.lengthInBeats;
-      } else {
-        // Add note to current bar
-        currentBar.push(note);
-        currentBarBeats += note.lengthInBeats;
-      }
-
-      // If current bar is exactly 4 beats, complete it
-      if (currentBarBeats === beatsPerBar) {
-        bars.push(currentBar);
-        currentBar = [];
-        currentBarBeats = 0;
-      }
-    }
-
-    // Add any remaining notes as the final bar
-    if (currentBar.length > 0) {
-      bars.push(currentBar);
-    }
-
-    return bars;
-  }
-
   useEffect(() => {
     if (!containerRef.current) return;
 
     // Clean up last render
     containerRef.current.innerHTML = "";
 
-    const bars = splitNotesIntoBars(sequence);
-    for (let index = 0; index < barCount; index++) {
-      const bar = bars[index];
-      // Draw bar
-      drawBar(bar, containerRef);
-    }
-  }, [sequence]);
+    // Draw bar
+    drawBar(notes, containerRef);
+  }, [notes]);
 
-  return (
-    <div className="w-screen flex justify-center">
-      <div className="w-10/12 overflow-x-auto">
-        <div ref={containerRef} />
-      </div>
-    </div>
-  );
+  return <div ref={containerRef} />;
 }
 
-export default VexFlowRenderer;
+export default VexFlowBar;
