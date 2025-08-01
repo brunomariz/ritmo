@@ -37,7 +37,7 @@ function VexFlowBar({ notes }: VexFlowBarProps) {
     const renderer = new Renderer(containerRef.current!, Renderer.Backends.SVG);
     // Canvas size capped at 5000 to avoid users setting them too big
     const pixelsPerBeat = 110;
-    const width = Math.min(pixelsPerBeat * numBeats * 1.2, 5000);
+    const width = Math.min(pixelsPerBeat * numBeats + 35, 5000);
     const height = 120;
     renderer.resize(width, height);
     const context = renderer.getContext();
