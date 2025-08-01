@@ -21,6 +21,7 @@ export default function Home() {
     generateRandomNotesWeighted(barCount, instrument.pitchMap)
   );
   const [showAdvancedConfigs, setShowAdvancedConfigs] = useState(false);
+  const [showScore, setShowScore] = useState(false);
 
   useEffect(() => {
     setSequence(generateRandomNotesWeighted(barCount, instrument.pitchMap));
@@ -30,7 +31,7 @@ export default function Home() {
     <div className="">
       <main className="text-3xl font-bold flex flex-col items-center justify-center min-h-screen">
         <TitleSection></TitleSection>
-        <div className="flex flex-col">
+        <div className="flex flex-col items-center">
           {/* Main Selectors */}
           <div className="p-2 flex flex-col items-center">
             <div className="flex flex-col items-end gap-4 w-full max-w-md">
@@ -72,7 +73,7 @@ export default function Home() {
               </div>
             </div>
             {/* Buttons */}
-            <div className="flex gap-4 mb-4">
+            <div className="flex gap-4 mb-4 pt-6">
               <GenerateButton
                 setSequence={setSequence}
                 barCount={barCount}
@@ -87,12 +88,20 @@ export default function Home() {
             </div>
           </div>
           {/* Music notation display */}
-          <VexFlowRenderer
-            sequence={sequence}
-            barCount={barCount}
-            repeatCount={repeatCount}
-          ></VexFlowRenderer>
-          {/* Note probability weights */}
+          <button
+            className="m-1 text-md w-72 px-4 py-2 rounded hover:brightness-90 active:brightness-75 bg-[#4c6c6c] text-white"
+            onClick={() => setShowScore((prev) => !prev)}
+          >
+            {showAdvancedConfigs ? "Ocultar Partitura" : "Revelar Partitura"}
+          </button>
+          {showScore && (
+            <VexFlowRenderer
+              sequence={sequence}
+              barCount={barCount}
+              repeatCount={repeatCount}
+            ></VexFlowRenderer>
+          )}
+          {/* Note and duration probability weights */}
           <AdvancedOptionsSection
             instrument={instrument}
             setInstrument={setInstrument}

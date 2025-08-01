@@ -20,7 +20,7 @@ export default function GenerateButton({
   };
 
   return (
-    <Button onClick={handleGenerate} className="bg-blue-500 text-white">
+    <Button onClick={handleGenerate} className="bg-[#e1cf63] text-white">
       Generate
     </Button>
   );

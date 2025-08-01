@@ -24,7 +24,7 @@ export default function PlayerButton({
   };
 
   return (
-    <Button onClick={handlePlay} className="bg-green-500 text-white">
+    <Button onClick={handlePlay} className="bg-[#0e1e4c] text-white">
       Play
     </Button>
   );

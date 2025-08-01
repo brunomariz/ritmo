@@ -19,9 +19,9 @@ function AdvancedOptionsSection({
 }: Props) {
   return (
     <>
-      <div className="p-2 flex flex-col">
+      <div className="flex flex-col items-center p-5">
         <button
-          className="text-sm px-4 py-2 rounded hover:brightness-90 active:brightness-75 bg-gray-600 text-white"
+          className="m-1 text-sm w-72 px-4 py-2 rounded hover:brightness-90 active:brightness-75 bg-gray-600 text-white"
           onClick={() => setShowAdvancedConfigs((prev) => !prev)}
         >
           {showAdvancedConfigs
