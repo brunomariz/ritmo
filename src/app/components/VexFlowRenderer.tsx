@@ -43,13 +43,21 @@ function VexFlowRenderer({
     const renderer = new Renderer(containerRef.current!, Renderer.Backends.SVG);
     // Canvas size capped at 5000 to avoid users setting them too big
     const pixelsPerBeat = 110;
-    renderer.resize(Math.min(pixelsPerBeat * numBeats * 1.2, 5000), 120);
+    const width = Math.min(pixelsPerBeat * numBeats * 1.2, 5000);
+    const height = 120;
+    renderer.resize(width, height);
     const context = renderer.getContext();
 
     // Create stave with variable size depending on number of beats
     const stave = new Stave(0, 0, pixelsPerBeat * numBeats + 34);
     stave.addClef("percussion").addTimeSignature("4/4");
     stave.setContext(context).draw();
+
+    // Add white background after drawing
+    const svgElement = containerRef.current!.querySelector("svg") as SVGElement;
+    if (svgElement) {
+      svgElement.style.backgroundColor = "white";
+    }
 
     const vexNotes = convertNotesToVexNotes(notes);
 
