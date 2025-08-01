@@ -32,8 +32,8 @@ function AdvancedOptionsSection({
           <div className="">
             <h2>Frequências das notas</h2>
             <p className="text-sm opacity-75 pb-3">
-              Quanto maior o número, mais a nota irá aparecer. Se o número for
-              zero, a nota não aparece.
+              Quanto maior o número, maior a frequência que a nota irá aparecer.
+              Se o número for zero, a nota não aparece.
             </p>
             {Object.entries(instrument.pitchMap).map(
               ([pitchKey, pitchMapItem], i) => {
