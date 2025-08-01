@@ -21,9 +21,8 @@ const NumberSelector = ({
       <input
         type="number"
         value={state}
-        onChange={(e) =>
-          setState(Math.min(max, Math.max(min, Number(e.target.value))))
-        }
+        onBlur={(e) => setState(Math.min(max, Math.max(min, state)))}
+        onChange={(e) => setState(Number(e.target.value))}
         min={min}
         max={max}
         step={1}
