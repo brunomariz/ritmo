@@ -13,8 +13,8 @@ import AdvancedOptionsSection from "./sections/AdvancedOptionsSection";
 import VexFlowSequenceRenderer from "./components/VexFlowSequenceRenderer";
 
 export default function Home() {
-  const [barCount, setBarCount] = useState<number>(1);
-  const [repeatCount, setRepeatCount] = useState<number>(1);
+  const [barCount, setBarCount] = useState<number>(2);
+  const [repeatCount, setRepeatCount] = useState<number>(2);
   const [bpm, setBpm] = useState<number>(120);
   const [instrument, setInstrument] = useState<Instrument>(instruments[0]);
   const [showAdvancedConfigs, setShowAdvancedConfigs] = useState(false);
